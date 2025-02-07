@@ -10,11 +10,10 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             text-align: center;
-            padding: 20px;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-top: 50px;
         }
 
@@ -24,7 +23,7 @@
         }
 
         .countdown {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-top: 20px;
             font-weight: bold;
         }
@@ -100,46 +99,6 @@
             border-radius: 8px;
         }
 
-        #musicPlayer {
-            margin-top: 20px;
-        }
-
-        #quiz {
-            margin-top: 30px;
-        }
-
-        #quiz button {
-            margin: 10px;
-        }
-
-        #guestbook {
-            margin-top: 30px;
-        }
-
-        #guestbook textarea {
-            width: 80%;
-            padding: 10px;
-            font-size: 1rem;
-        }
-
-        .message {
-            margin-top: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Custom styles for better design */
-        .image-gallery-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .image-gallery-container img {
-            width: 200px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
     </style>
 </head>
 <body>
@@ -159,13 +118,6 @@
         <button class="submit-btn" onclick="saveName()">Submit</button>
     </div>
 
-    <!-- Music Player -->
-    <div id="musicPlayer">
-        <audio autoplay loop>
-            <source src="birthday-music.mp3" type="audio/mp3">
-        </audio>
-    </div>
-
     <!-- Chatbot Section -->
     <div class="chat-container" id="chatbot-section">
         <div class="chatbox" id="chatbox">
@@ -176,28 +128,12 @@
         <p id="answer"></p>
     </div>
 
-    <!-- Interactive Quiz -->
-    <div id="quiz">
-        <h2>Trivia Quiz: What's Ayush's favorite color?</h2>
-        <button onclick="checkAnswer('White')">White</button>
-        <button onclick="checkAnswer('Red')">Red</button>
-        <button onclick="checkAnswer('Blue')">Blue</button>
-    </div>
-
-    <!-- Guestbook Section -->
-    <div id="guestbook">
-        <h3>Leave a message for Ayush!</h3>
-        <textarea placeholder="Write your message here..."></textarea><br>
-        <button class="submit-btn" onclick="submitMessage()">Submit</button>
-        <div id="messages"></div>
-    </div>
-
-    <!-- Photo Gallery -->
-    <div class="image-gallery-container">
+    <!-- Image Gallery -->
+    <div class="gallery">
         <h2>Photo Gallery</h2>
-        <img src="image1.jpg" alt="Birthday Image 1">
-        <img src="image2.jpg" alt="Birthday Image 2">
-        <img src="image3.jpg" alt="Birthday Image 3">
+        <img src="image1.jpg" alt="image1">
+        <img src="image2.jpg" alt="image2">
+        <img src="image3.jpg" alt="image3">
     </div>
 
     <script>
@@ -288,4 +224,12 @@
 
             if (!foundAnswer) {
                 answerBox.innerText = "Sorry, I don't know the answer to that.";
-                answerBox.style.color = "
+                answerBox.style.color = "red";
+            }
+
+            document.getElementById("question").value = "";
+        }
+    </script>
+
+</body>
+</html>
