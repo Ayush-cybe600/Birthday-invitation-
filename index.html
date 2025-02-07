@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush's Birthday Invitation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fce4ec;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #d81b60;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px gray;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .rsvp-form {
+            margin-top: 20px;
+        }
+        .rsvp-form input, .rsvp-form button {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>You're Invited to Ayush Kumar's Birthday Party! 🎉</h1>
+        <p><b>Date:</b> 26th September</p>
+        <p><b>Time:</b> 6:00 PM</p>
+        <p><b>Venue:</b> [Add your venue here]</p>
+
+        <h2>Countdown to the Big Day</h2>
+        <div id="countdown"></div>
+
+        <h2>RSVP Now</h2>
+        <form class="rsvp-form" action="https://formsubmit.co/YOUR_EMAIL" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Confirm Attendance</button>
+        </form>
+
+        <div class="footer">
+            <p>Looking forward to celebrating with you!</p>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const birthday = new Date('September 26, 2025 18:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = birthday - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (timeLeft < 0) {
+                document.getElementById("countdown").innerHTML = "It's Party Time!";
+            }
+        }
+        setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
