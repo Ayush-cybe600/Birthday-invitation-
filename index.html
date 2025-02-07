@@ -3,231 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Kumar's Birthday Invitation</title>
+    <title>Ayush's Birthday Invitation</title>
     <style>
-        /* Basic styling */
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            text-align: center;
+            background-color: #fbe9e7;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        /* Image */
+        .birthday-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+        /* About Me Section */
+        .about-me {
+            background: #ffeb3b;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        /* Guest Book */
+        .guest-book {
+            background: #f8bbd0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 50px;
+        }
+        /* Q&A Chatbot */
+        .qa-section {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .qa-section input {
+            padding: 8px;
+            width: 70%;
+        }
+        /* Guess the Number Game */
+        .game-section {
+            background: #c8e6c9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .game-section input {
+            padding: 8px;
+            width: 50px;
             text-align: center;
         }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-top: 50px;
-        }
-
-        .greeting {
-            font-size: 1.5rem;
-            margin-top: 30px;
-        }
-
-        .countdown {
-            font-size: 1.8rem;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .name-input {
-            font-size: 1rem;
+        button {
             padding: 10px;
-            margin-top: 20px;
-        }
-
-        .submit-btn {
-            font-size: 1rem;
-            padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #4CAF50;
+            background: #ff4081;
             color: white;
             border: none;
             cursor: pointer;
+            margin-top: 10px;
         }
-
-        .submit-btn:hover {
-            background-color: #45a049;
+        button:hover {
+            background: #e91e63;
         }
-
-        .chat-container {
-            margin-top: 30px;
-        }
-
-        .chatbox {
-            width: 80%;
-            height: 200px;
-            margin: 0 auto;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            overflow-y: scroll;
-            font-size: 1rem;
-            border-radius: 5px;
-        }
-
-        .chatbot-input {
-            width: 80%;
-            padding: 10px;
-            font-size: 1rem;
-            margin-top: 20px;
-        }
-
-        .chatbot-btn {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .chatbot-btn:hover {
-            background-color: #45a049;
-        }
-
-        .question-box {
-            margin-top: 20px;
-        }
-
-        .question-box input {
-            padding: 10px;
-            width: 200px;
-        }
-
-        .gallery img {
-            width: 150px;
-            margin: 10px;
-            border-radius: 8px;
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <h1>Ayush Kumar's Birthday Invitation</h1>
+    <div class="container">
+        <!-- Birthday Banner -->
+        <h1>🎉 Welcome to Ayush's Birthday Invitation 🎂</h1>
+        <img src="Snapchat-1242957933.jpg" alt="Ayush's Photo" class="birthday-image">
 
-    <!-- Personalized Greeting -->
-    <div class="greeting" id="greeting"></div>
-
-    <!-- Countdown Timer -->
-    <div class="countdown" id="countdown"></div>
-
-    <!-- Name Input Section -->
-    <div id="nameInputSection">
-        <input type="text" id="userName" class="name-input" placeholder="Enter your name">
-        <button class="submit-btn" onclick="saveName()">Submit</button>
-    </div>
-
-    <!-- Chatbot Section -->
-    <div class="chat-container" id="chatbot-section">
-        <div class="chatbox" id="chatbox">
-            <p>Chatbot: Hi! Ask me about Ayush Kumar.</p>
+        <!-- About Me -->
+        <div class="about-me">
+            <h2>About Me</h2>
+            <p>Hi, I'm Ayush Kumar! I love coding, technology, and learning new things. My birthday is on <b>26th September</b>, and I'm excited to celebrate with you all!</p>
         </div>
-        <input type="text" id="question" class="chatbot-input" placeholder="Ask me a question...">
-        <button class="chatbot-btn" onclick="getAnswer()">Ask</button>
-        <p id="answer"></p>
+
+        <!-- Guest Book -->
+        <div class="guest-book">
+            <h2>Leave a Birthday Message</h2>
+            <textarea id="message" placeholder="Write your message here..."></textarea>
+            <button onclick="addMessage()">Submit</button>
+            <ul id="messages"></ul>
+        </div>
+
+        <!-- Q&A Chatbot -->
+        <div class="qa-section">
+            <h2>Ask About Ayush</h2>
+            <input type="text" id="question" placeholder="Ask a question..." onkeypress="handleKeyPress(event)">
+            <button onclick="getAnswer()">Ask</button>
+            <p id="answer"></p>
+        </div>
+
+        <!-- Guess the Number Game -->
+        <div class="game-section">
+            <h2>🎮 Guess the Number Game</h2>
+            <p>I've chosen a number between 1 and 20. Can you guess it?</p>
+            <input type="number" id="userGuess" placeholder="Enter your guess">
+            <button onclick="checkGuess()">Guess</button>
+            <p id="gameMessage"></p>
+        </div>
+
     </div>
 
-    <!-- Image Gallery -->
-    <div class="gallery">
-        <h2>Photo Gallery</h2>
-        <img src="image1.jpg" alt="image1">
-        <img src="image2.jpg" alt="image2">
-        <img src="image3.jpg" alt="image3">
-    </div>
-
+    <!-- JavaScript -->
     <script>
-        // Function to save and greet user with their name
-        if (localStorage.getItem("userName")) {
-            greetUser();
-        } else {
-            document.getElementById("nameInputSection").style.display = "block";
-        }
-
-        function saveName() {
-            const userName = document.getElementById("userName").value.trim();
-            if (userName) {
-                localStorage.setItem("userName", userName);
-                greetUser();
-                document.getElementById("nameInputSection").style.display = "none";
+        // Guest Book Script
+        function addMessage() {
+            var message = document.getElementById("message").value;
+            if (message.trim() !== "") {
+                var li = document.createElement("li");
+                li.innerHTML = message;
+                document.getElementById("messages").appendChild(li);
+                document.getElementById("message").value = "";
             }
         }
 
-        function greetUser() {
-            const userName = localStorage.getItem("userName");
-            document.getElementById("greeting").innerText = `Hello, ${userName}! Welcome to Ayush’s Birthday!`;
-        }
-
-        // Countdown Timer
-        const birthday = new Date("September 26, 2025 00:00:00").getTime();
-        const countdownInterval = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = birthday - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "Happy Birthday, Ayush!";
-            }
-        }, 1000);
-
-        // Chatbot functionality
-        const answerDatabase = {
-            "birthday boy name": ["what is birthday boy name", "who is the birthday boy", "name of the birthday boy"],
-            "father's name": ["what is father's name", "who is his father", "father's name"],
-            "mother's name": ["what is mother's name", "who is his mother", "mother's name"],
-            "brothers": ["who are his brothers", "what are the names of his brothers", "name of his brothers"],
-            "sisters": ["who are his sisters", "what are the names of his sisters", "name of his sisters"],
-            "class": ["in which class does he study", "what class is he in", "which class is he studying"],
-            "school": ["what is his school name", "where does he study", "name of his school"],
-            "favorite color": ["what is your favorite color", "what's your favorite color", "color you like most"],
-            "hobbies": ["what are your hobbies", "what do you like to do", "your hobbies"],
-            "favorite food": ["what is your favorite food", "what do you like to eat", "favorite food"],
-            "favorite movie": ["what is your favorite movie", "your favorite movie", "movie you like the most"],
-            "location": ["where do you live", "where is your home", "location"]
-        };
-
-        const answers = {
-            "birthday boy name": "Ayush Kumar",
-            "father's name": "Yashoda Nand Bharti",
-            "mother's name": "Vandana",
-            "brothers": "Shreyansh and Aman",
-            "sisters": "Arpita and Archana",
-            "class": "Class 12D",
-            "school": "GN National School",
-            "favorite color": "White",
-            "hobbies": "Playing",
-            "favorite food": "Biryani",
-            "favorite movie": "12th Fail",
-            "location": "I live in Nautanwa, Uttar Pradesh."
-        };
-
+        // Q&A Chatbot Script
         function getAnswer() {
-            let question = document.getElementById("question").value.toLowerCase().trim();
-            let answerBox = document.getElementById("answer");
+            var question = document.getElementById("question").value.toLowerCase();
+            var answerBox = document.getElementById("answer");
 
-            let foundAnswer = false;
-            
-            for (let key in answerDatabase) {
-                if (answerDatabase[key].some(variant => question.includes(variant))) {
-                    answerBox.innerText = answers[key];
-                    answerBox.style.color = "green";
-                    foundAnswer = true;
-                    break;
-                }
-            }
+            var answers = {
+                "what is birthday boy name": "Ayush Kumar",
+                "what is father's name": "Yashoda Nand Bharti",
+                "what is mother name": "Vandana",
+                "who are his brothers": "Shreyansh and Aman",
+                "who are his sisters": "Arpita and Archana",
+                "in which class does he study": "Class 12D",
+                "what is his school name": "GN National School"
+            };
 
-            if (!foundAnswer) {
+            if (answers[question]) {
+                answerBox.innerText = answers[question];
+            } else {
                 answerBox.innerText = "Sorry, I don't know the answer to that.";
-                answerBox.style.color = "red";
             }
 
-            document.getElementById("question").value = "";
+            document.getElementById("question").value = ""; // Clear input field
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                getAnswer();
+            }
+        }
+
+        // Guess the Number Game Script
+        var randomNumber = Math.floor(Math.random() * 20) + 1;
+        
+        function checkGuess() {
+            var userGuess = document.getElementById("userGuess").value;
+            var message = document.getElementById("gameMessage");
+
+            if (userGuess == randomNumber) {
+                message.innerHTML = "🎉 Correct! You guessed the number!";
+                message.style.color = "green";
+            } else if (userGuess > randomNumber) {
+                message.innerHTML = "Too high! Try again.";
+                message.style.color = "red";
+            } else {
+                message.innerHTML = "Too low! Try again.";
+                message.style.color = "red";
+            }
         }
     </script>
 
