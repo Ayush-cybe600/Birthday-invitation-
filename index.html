@@ -5,90 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayush's Birthday Invitation</title>
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #fce4ec;
-            color: #333;
+            background-color: #fbe9e7;
             margin: 0;
             padding: 0;
         }
-        h1 {
-            color: #d81b60;
+        h1, h2 {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .container {
+            width: 90%;
             max-width: 600px;
             margin: auto;
-            padding: 20px;
             background: white;
-            box-shadow: 0px 0px 10px gray;
+            padding: 20px;
             border-radius: 10px;
-            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        #countdown {
-            font-size: 24px;
-            font-weight: bold;
+        /* Image */
+        .birthday-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+        /* About Me Section */
+        .about-me {
+            background: #ffeb3b;
+            padding: 15px;
+            border-radius: 10px;
             margin: 20px 0;
         }
-        .rsvp-form {
-            margin-top: 20px;
+        /* Guest Book */
+        .guest-book {
+            background: #f8bbd0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
         }
-        .rsvp-form input, .rsvp-form button {
-            padding: 10px;
+        textarea {
             width: 100%;
+            height: 50px;
+        }
+        /* Q&A Chatbot */
+        .qa-section {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .qa-section input {
+            padding: 8px;
+            width: 70%;
+        }
+        /* Guess the Number Game */
+        .game-section {
+            background: #c8e6c9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .game-section input {
+            padding: 8px;
+            width: 50px;
+            text-align: center;
+        }
+        button {
+            padding: 10px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            cursor: pointer;
             margin-top: 10px;
         }
-        .footer {
-            margin-top: 20px;
-            font-size: 14px;
+        button:hover {
+            background: #e91e63;
         }
-        
     </style>
 </head>
 <body>
-    
 
     <div class="container">
-        <h1>You're Invited to Ayush Kumar's Birthday Party! 🎉</h1>
-        <p><b>Date:</b> 26th September</p>
-        <p><b>Time:</b> 6:00 PM</p>
-        <p><b>Venue:</b> white house </p>
+        <!-- Birthday Banner -->
+        <h1>🎉 Welcome to Ayush's Birthday Invitation 🎂</h1>
+        <img src="Snapchat-1242957933.jpg" alt="Ayush's Photo" class="birthday-image">
 
-        <h2>Countdown to the Big Day</h2>
-        <div id="countdown"></div>
-        <img src="Snapchat-1242957933.jpg" alt="Ayush's Image" width="100%">
-
-        
-
-        <div class="footer">
-            <p>Looking forward to celebrating with you!</p>
-        </div>
+        <!-- About Me -->
         <div class="about-me">
-    <h2>About Me</h2>
-    <p>Hi, I'm Ayush Kumar! I love coding, technology, and learning new things. My birthday is on <b>26th September</b>, and I'm excited to celebrate with you all!</p>
+            <h2>About Me</h2>
+            <p>Hi, I'm Ayush Kumar! I love coding, technology, and learning new things. My birthday is on <b>26th September</b>, and I'm excited to celebrate with you all!</p>
         </div>
-        
+
+        <!-- Guest Book -->
+        <div class="guest-book">
+            <h2>Leave a Birthday Message</h2>
+            <textarea id="message" placeholder="Write your message here..."></textarea>
+            <button onclick="addMessage()">Submit</button>
+            <ul id="messages"></ul>
+        </div>
+
+        <!-- Q&A Chatbot -->
+        <div class="qa-section">
+            <h2>Ask About Ayush</h2>
+            <input type="text" id="question" placeholder="Ask a question..." onkeypress="handleKeyPress(event)">
+            <button onclick="getAnswer()">Ask</button>
+            <p id="answer"></p>
+        </div>
+
+        <!-- Guess the Number Game -->
+        <div class="game-section">
+            <h2>🎮 Guess the Number Game</h2>
+            <p>I've chosen a number between 1 and 20. Can you guess it?</p>
+            <input type="number" id="userGuess" placeholder="Enter your guess">
+            <button onclick="checkGuess()">Guess</button>
+            <p id="gameMessage"></p>
+        </div>
+
     </div>
 
+    <!-- JavaScript -->
     <script>
-        function updateCountdown() {
-            const birthday = new Date('September 26, 2025 18:00:00').getTime();
-            const now = new Date().getTime();
-            const timeLeft = birthday - now;
-
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML =
-                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-            if (timeLeft < 0) {
-                document.getElementById("countdown").innerHTML = "It's Party Time!";
+        // Guest Book Script
+        function addMessage() {
+            var message = document.getElementById("message").value;
+            if (message.trim() !== "") {
+                var li = document.createElement("li");
+                li.innerHTML = message;
+                document.getElementById("messages").appendChild(li);
+                document.getElementById("message").value = "";
             }
         }
-        setInterval(updateCountdown, 1000);
+
+        // Q&A Chatbot Script
+        function getAnswer() {
+            var question = document.getElementById("question").value.toLowerCase();
+            var answerBox = document.getElementById("answer");
+
+            var answers = {
+                "what is birthday boy name": "Ayush Kumar",
+                "what is father's name": "Yashoda Nand Bharti",
+                "what is mother name": "Vandana",
+                "who are his brothers": "Shreyansh and Aman",
+                "who are his sisters": "Arpita and Archana",
+                "in which class does he study": "Class 12D",
+                "what is his school name": "GN National School"
+            };
+
+            if (answers[question]) {
+                answerBox.innerText = answers[question];
+            } else {
+                answerBox.innerText = "Sorry, I don't know the answer to that.";
+            }
+
+            document.getElementById("question").value = ""; // Clear input field
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                getAnswer();
+            }
+        }
+
+        // Guess the Number Game Script
+        var randomNumber = Math.floor(Math.random() * 20) + 1;
+        
+        function checkGuess() {
+            var userGuess = document.getElementById("userGuess").value;
+            var message = document.getElementById("gameMessage");
+
+            if (userGuess == randomNumber) {
+                message.innerHTML = "🎉 Correct! You guessed the number!";
+                message.style.color = "green";
+            } else if (userGuess > randomNumber) {
+                message.innerHTML = "Too high! Try again.";
+                message.style.color = "red";
+            } else {
+                message.innerHTML = "Too low! Try again.";
+                message.style.color = "red";
+            }
+        }
     </script>
 
 </body>
