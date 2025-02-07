@@ -5,48 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayush Kumar's Birthday Invitation</title>
     <style>
-        /* Basic Reset and Body Styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Basic styling */
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4);
-            color: #333;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
         }
 
         h1 {
             font-size: 3rem;
             margin-top: 50px;
-            color: #333;
         }
 
         .greeting {
             font-size: 1.5rem;
-            margin-top: 20px;
-            color: #333;
+            margin-top: 30px;
         }
 
         .countdown {
             font-size: 2rem;
             margin-top: 20px;
             font-weight: bold;
-            color: #e74c3c;
         }
 
-        /* Name Input */
         .name-input {
             font-size: 1rem;
             padding: 10px;
             margin-top: 20px;
-            width: 60%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
         }
 
         .submit-btn {
@@ -56,7 +42,6 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
 
@@ -64,7 +49,6 @@
             background-color: #45a049;
         }
 
-        /* Chatbot */
         .chat-container {
             margin-top: 30px;
         }
@@ -79,7 +63,6 @@
             overflow-y: scroll;
             font-size: 1rem;
             border-radius: 5px;
-            background-color: #f7f7f7;
         }
 
         .chatbot-input {
@@ -87,8 +70,6 @@
             padding: 10px;
             font-size: 1rem;
             margin-top: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
         }
 
         .chatbot-btn {
@@ -98,29 +79,39 @@
             color: white;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
         }
 
         .chatbot-btn:hover {
             background-color: #45a049;
         }
 
-        /* Image Gallery */
-        .image-gallery-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+        .question-box {
+            margin-top: 20px;
+        }
+
+        .question-box input {
+            padding: 10px;
+            width: 200px;
+        }
+
+        .gallery img {
+            width: 150px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        #musicPlayer {
+            margin-top: 20px;
+        }
+
+        #quiz {
             margin-top: 30px;
         }
 
-        .image-gallery-container img {
-            width: 200px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        #quiz button {
+            margin: 10px;
         }
 
-        /* Guestbook */
         #guestbook {
             margin-top: 30px;
         }
@@ -129,45 +120,25 @@
             width: 80%;
             padding: 10px;
             font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
         }
 
         .message {
             margin-top: 10px;
             font-size: 1.2rem;
-            color: #333;
-            border-bottom: 1px solid #ccc;
-            padding: 5px;
         }
 
-        /* Quiz Section */
-        #quiz {
-            margin-top: 30px;
-            background-color: #f7f7f7;
-            padding: 20px;
-            border-radius: 8px;
+        /* Custom styles for better design */
+        .image-gallery-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        #quiz button {
-            margin: 10px;
-            padding: 10px 20px;
-            background-color: #ff6347;
-            border: none;
-            color: white;
-            font-size: 1rem;
-            border-radius: 5px;
-        }
-
-        #quiz button:hover {
-            background-color: #ff4500;
-        }
-
-        /* Countdown Section */
-        .countdown {
-            font-size: 2rem;
-            margin-top: 20px;
-            color: #ff6347;
+        .image-gallery-container img {
+            width: 200px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -186,6 +157,13 @@
     <div id="nameInputSection">
         <input type="text" id="userName" class="name-input" placeholder="Enter your name">
         <button class="submit-btn" onclick="saveName()">Submit</button>
+    </div>
+
+    <!-- Music Player -->
+    <div id="musicPlayer">
+        <audio autoplay loop>
+            <source src="birthday-music.mp3" type="audio/mp3">
+        </audio>
     </div>
 
     <!-- Chatbot Section -->
@@ -217,7 +195,6 @@
     <!-- Photo Gallery -->
     <div class="image-gallery-container">
         <h2>Photo Gallery</h2>
-        <img src="Snapchat-1242957933.jpg" alt="Snapchat Image" />
         <img src="image1.jpg" alt="Birthday Image 1">
         <img src="image2.jpg" alt="Birthday Image 2">
         <img src="image3.jpg" alt="Birthday Image 3">
@@ -265,18 +242,18 @@
 
         // Chatbot functionality
         const answerDatabase = {
-            "birthday boy name": ["what is birthday boy name", "who is the birthday boy", "name of the birthday boy", "who is ayush"],
-            "father's name": ["who is ayush's father", "what is his father's name", "who is his dad", "father of the birthday boy"],
-            "mother's name": ["who is ayush's mother", "what is his mother's name", "who is his mom", "mother of the birthday boy"],
-            "brothers": ["who are his brothers", "what are the names of his brothers", "brothers of ayush", "does ayush have brothers"],
-            "sisters": ["who are his sisters", "what are the names of his sisters", "sisters of ayush", "does ayush have sisters"],
-            "class": ["in which class does ayush study", "what class is he in", "which class is ayush studying"],
-            "school": ["what is ayush's school name", "where does ayush study", "name of ayush's school"],
-            "favorite color": ["what is ayush's favorite color", "color of ayush", "favorite color of the birthday boy"],
-            "hobbies": ["what are ayush's hobbies", "what does ayush like to do", "what does the birthday boy like to do"],
-            "favorite food": ["what is ayush's favorite food", "what does ayush like to eat", "favorite food of the birthday boy"],
-            "favorite movie": ["what is ayush's favorite movie", "movie ayush likes", "favorite movie of the birthday boy"],
-            "location": ["where does ayush live", "where is ayush's home", "where is the birthday boy from"]
+            "birthday boy name": ["what is birthday boy name", "who is the birthday boy", "name of the birthday boy"],
+            "father's name": ["what is father's name", "who is his father", "father's name"],
+            "mother's name": ["what is mother's name", "who is his mother", "mother's name"],
+            "brothers": ["who are his brothers", "what are the names of his brothers", "name of his brothers"],
+            "sisters": ["who are his sisters", "what are the names of his sisters", "name of his sisters"],
+            "class": ["in which class does he study", "what class is he in", "which class is he studying"],
+            "school": ["what is his school name", "where does he study", "name of his school"],
+            "favorite color": ["what is your favorite color", "what's your favorite color", "color you like most"],
+            "hobbies": ["what are your hobbies", "what do you like to do", "your hobbies"],
+            "favorite food": ["what is your favorite food", "what do you like to eat", "favorite food"],
+            "favorite movie": ["what is your favorite movie", "your favorite movie", "movie you like the most"],
+            "location": ["where do you live", "where is your home", "location"]
         };
 
         const answers = {
@@ -286,3 +263,29 @@
             "brothers": "Shreyansh and Aman",
             "sisters": "Arpita and Archana",
             "class": "Class 12D",
+            "school": "GN National School",
+            "favorite color": "White",
+            "hobbies": "Playing",
+            "favorite food": "Biryani",
+            "favorite movie": "12th Fail",
+            "location": "I live in Nautanwa, Uttar Pradesh."
+        };
+
+        function getAnswer() {
+            let question = document.getElementById("question").value.toLowerCase().trim();
+            let answerBox = document.getElementById("answer");
+
+            let foundAnswer = false;
+            
+            for (let key in answerDatabase) {
+                if (answerDatabase[key].some(variant => question.includes(variant))) {
+                    answerBox.innerText = answers[key];
+                    answerBox.style.color = "green";
+                    foundAnswer = true;
+                    break;
+                }
+            }
+
+            if (!foundAnswer) {
+                answerBox.innerText = "Sorry, I don't know the answer to that.";
+                answerBox.style.color = "
