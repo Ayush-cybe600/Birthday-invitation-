@@ -34,6 +34,15 @@
             width: 100%;
             border-radius: 10px;
         }
+        /* Countdown Timer */
+        .countdown {
+            background: #ffccbc;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
         /* About Me Section */
         .about-me {
             background: #ffeb3b;
@@ -95,6 +104,12 @@
         <h1>🎉 Welcome to Ayush's Birthday Invitation 🎂</h1>
         <img src="Snapchat-1242957933.jpg" alt="Ayush's Photo" class="birthday-image">
 
+        <!-- Countdown Timer -->
+        <div class="countdown">
+            <h2>⏳ Countdown to My Birthday</h2>
+            <p id="countdown-timer">Loading...</p>
+        </div>
+
         <!-- About Me -->
         <div class="about-me">
             <h2>About Me</h2>
@@ -130,6 +145,28 @@
 
     <!-- JavaScript -->
     <script>
+        // Countdown Timer Script
+        function updateCountdown() {
+            var birthday = new Date("September 26, " + new Date().getFullYear() + " 00:00:00").getTime();
+            var now = new Date().getTime();
+            var timeLeft = birthday - now;
+
+            if (timeLeft < 0) {
+                birthday = new Date("September 26, " + (new Date().getFullYear() + 1) + " 00:00:00").getTime();
+                timeLeft = birthday - now;
+            }
+
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown-timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
         // Guest Book Script
         function addMessage() {
             var message = document.getElementById("message").value;
@@ -141,53 +178,36 @@
             }
         }
 
-        // Q&A Chatbot Script
+        // Enhanced Q&A Chatbot Script
         function getAnswer() {
             var question = document.getElementById("question").value.toLowerCase();
             var answerBox = document.getElementById("answer");
 
-            var answers = {
-                "what is birthday boy name": "Ayush Kumar",
-                "what is father's name": "Yashoda Nand Bharti",
-                "what is mother name": "Vandana",
-                "who are his brothers": "Shreyansh and Aman",
-                "who are his sisters": "Arpita and Archana",
-                "in which class does he study": "Class 12D",
-                "what is his school name": "GN National School"
+            var responses = {
+                "birthday boy name": ["The birthday star is Ayush Kumar! 🎂", "It's Ayush Kumar!"],
+                "father's name": ["His father is Yashoda Nand Bharti.", "His dad's name is Yashoda Nand Bharti."],
+                "mother's name": ["His mother is Vandana.", "Her name is Vandana!"],
+                "brothers": ["He has two brothers: Shreyansh and Aman.", "Shreyansh and Aman are his brothers!"],
+                "sisters": ["His sisters are Arpita and Archana.", "Arpita and Archana are his sisters!"],
+                "class": ["Ayush studies in Class 12D.", "He's in Class 12D!"],
+                "school": ["He studies at GN National School.", "His school is GN National School."]
             };
 
-            if (answers[question]) {
-                answerBox.innerText = answers[question];
-            } else {
-                answerBox.innerText = "Sorry, I don't know the answer to that.";
+            var found = false;
+            for (var key in responses) {
+                if (question.includes(key)) {
+                    answerBox.innerText = responses[key][Math.floor(Math.random() * responses[key].length)];
+                    found = true;
+                    break;
+                }
             }
 
-            document.getElementById("question").value = ""; // Clear input field
+            if (!found) answerBox.innerText = "Hmm... I don't know that. Try asking about Ayush!";
+            document.getElementById("question").value = "";
         }
 
         function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                getAnswer();
-            }
-        }
-
-        // Guess the Number Game Script
-        var randomNumber = Math.floor(Math.random() * 20) + 1;
-        
-        function checkGuess() {
-            var userGuess = document.getElementById("userGuess").value;
-            var message = document.getElementById("gameMessage");
-
-            if (userGuess == randomNumber) {
-                message.innerHTML = "🎉 Correct! You guessed the number!";
-                message.style.color = "green";
-            } else if (userGuess > randomNumber) {
-                message.innerHTML = "Too high! Try again.";
-                message.style.color = "red";
-            } else {
-                message.innerHTML = "Too low! Try again.";
-                message.style.color = "red";
-            }
+            if (event.key === "Enter") getAnswer();
         }
     </script>
 
